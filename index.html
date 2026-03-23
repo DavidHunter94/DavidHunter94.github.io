@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>David Martínez — QA Engineer</title>
+<title>David Martinez — QA Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -22,22 +22,22 @@
   .lang-btn:hover:not(.active) { border-color: var(--accent2); color: var(--accent2); }
   main { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 100px 24px 60px; }
   .hero { padding: 60px 0 48px; border-bottom: 1px solid var(--border); margin-bottom: 64px; }
-  .hero-label { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 3px; margin-bottom: 16px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s; }
-  .status-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--green); background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); padding: 6px 14px; border-radius: 20px; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.15s; }
+  .status-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--green); background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); padding: 6px 14px; border-radius: 20px; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+  .hero-label { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 3px; margin-bottom: 16px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.15s; }
   .hero-name { font-family: var(--mono); font-size: clamp(32px,5vw,52px); font-weight: 700; line-height: 1.1; margin-bottom: 12px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s; }
   .hero-name span { color: var(--accent); }
   .hero-title { font-family: var(--mono); font-size: 15px; color: var(--green); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s; }
-  .hero-desc { font-size: 16px; color: #94a3b8; line-height: 1.7; max-width: 600px; margin-bottom: 32px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s; }
-  .hero-links { display: flex; gap: 12px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s ease forwards 0.5s; align-items: center; }
-  .btn { font-family: var(--mono); font-size: 12px; padding: 10px 20px; border-radius: 4px; text-decoration: none; letter-spacing: 1px; transition: all 0.2s; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px; }
+  .hero-desc { font-size: 16px; color: #94a3b8; line-height: 1.7; max-width: 600px; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s; }
+  .hero-links { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; opacity: 0; animation: fadeUp 0.6s ease forwards 0.5s; }
+  .btn { font-family: var(--mono); font-size: 12px; padding: 10px 20px; border-radius: 4px; text-decoration: none; letter-spacing: 1px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
   .btn-primary { background: var(--accent); color: white; }
   .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
   .btn-outline { background: transparent; color: var(--accent2); border: 1px solid var(--border); }
   .btn-outline:hover { border-color: var(--accent2); transform: translateY(-1px); }
-  .email-wrap { position: relative; }
-  .email-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--green); color: #0f172a; font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 4px; white-space: nowrap; pointer-events: none; }
-  .email-tooltip.show { display: block; }
+  .email-text { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.5px; }
+  .email-text a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .email-text a:hover { color: var(--accent2); }
   section { margin-bottom: 64px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.6s; }
   .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
   .section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 3px; }
@@ -52,15 +52,14 @@
   .edu-badge { font-family: var(--mono); font-size: 10px; padding: 3px 10px; background: rgba(59,130,246,0.1); color: var(--accent2); border: 1px solid rgba(59,130,246,0.2); border-radius: 3px; }
   .edu-year { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
   .interests-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; }
-  .interest-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 18px; transition: all 0.2s; }
-  .interest-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .interest-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 18px; transition: border-color 0.2s; }
+  .interest-card:hover { border-color: var(--accent); }
   .interest-icon { font-size: 24px; margin-bottom: 10px; }
   .interest-title { font-family: var(--mono); font-size: 12px; color: var(--text); margin-bottom: 4px; font-weight: 600; }
   .interest-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 10px; }
-  .skill-tag { font-family: var(--mono); font-size: 12px; padding: 10px 14px; background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; color: #94a3b8; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
-  .skill-tag:hover { border-color: var(--accent); color: var(--accent2); }
-  .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 10px; }
+  .skill-tag { font-family: var(--mono); font-size: 12px; padding: 12px 10px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; color: #94a3b8; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .skill-tag img { width: 28px; height: 28px; }
   .projects-grid { display: grid; gap: 16px; }
   .project-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 24px; transition: all 0.25s; text-decoration: none; display: block; position: relative; overflow: hidden; }
   .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); transform: scaleY(0); transition: transform 0.25s; }
@@ -93,6 +92,7 @@
   <button class="lang-btn" onclick="setLang('en')">EN</button>
 </div>
 <main>
+
   <div class="hero">
     <div class="status-badge"><span class="dot"></span>
       <span data-es>Disponible para nuevas oportunidades</span>
@@ -110,14 +110,7 @@
     <div class="hero-links">
       <a href="https://github.com/DavidHunter94" target="_blank" class="btn btn-primary">GitHub</a>
       <a href="https://www.linkedin.com/in/victor-david-martinez-matias-624160346/" target="_blank" class="btn btn-outline">LinkedIn</a>
-      <div class="email-wrap">
-        <button class="btn btn-outline" onclick="copyEmail()">
-          <span data-es>Copiar Email</span><span data-en>Copy Email</span>
-        </button>
-        <div class="email-tooltip" id="tooltip">
-          <span data-es>Copiado!</span><span data-en>Copied!</span>
-        </div>
-      </div>
+      <span class="email-text"><a href="mailto:davidmatiasmh94@gmail.com">davidmatiasmh94@gmail.com</a></span>
     </div>
   </div>
 
@@ -198,18 +191,16 @@
       <div class="section-line"></div>
     </div>
     <div class="skills-grid">
-      <div class="skill-tag"><span class="skill-dot"></span>Python</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Selenium</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Playwright</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Cypress</div>
-      <div class="skill-tag"><span class="skill-dot"></span>pytest</div>
-      <div class="skill-tag"><span class="skill-dot"></span>SQL</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Postman</div>
-      <div class="skill-tag"><span class="skill-dot"></span>GitHub Actions</div>
-      <div class="skill-tag"><span class="skill-dot"></span>JIRA</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Page Object Model</div>
-      <div class="skill-tag"><span class="skill-dot"></span>REST APIs</div>
-      <div class="skill-tag"><span class="skill-dot"></span>Scrum</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">Python</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" alt="Selenium">Selenium</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg" alt="Playwright">Playwright</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cypressio/cypressio-original.svg" alt="Cypress">Cypress</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytest/pytest-original.svg" alt="pytest">pytest</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL">SQL</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub Actions" style="filter:invert(0.7)">GitHub Actions</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="JIRA">JIRA</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman">Postman</div>
+      <div class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">Git</div>
     </div>
   </section>
 
@@ -260,8 +251,8 @@
       <span data-en>Built with HTML · Hosted on GitHub Pages</span>
     </p>
   </footer>
-</main>
 
+</main>
 <script>
   function setLang(lang) {
     document.body.className = lang;
@@ -271,13 +262,6 @@
   }
   const saved = localStorage.getItem('lang') || 'es';
   if (saved === 'en') setLang('en');
-
-  function copyEmail() {
-    navigator.clipboard.writeText('davidmatiasmh94@gmail.com');
-    const t = document.getElementById('tooltip');
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2000);
-  }
 </script>
 </body>
 </html>
