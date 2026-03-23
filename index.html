@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Martínez — QA Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c14;
+    --bg2: #0d1220;
+    --bg3: #111827;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --green: #34d399;
+    --red: #f87171;
+    --amber: #fbbf24;
+    --text: #f1f5f9;
+    --muted: #64748b;
+    --border: #1e293b;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Lang toggle */
+  .lang-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 32px;
+    background: rgba(8,12,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lang-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .lang-btn:first-child { border-radius: 4px 0 0 4px; }
+  .lang-btn:last-child { border-radius: 0 4px 4px 0; border-left: none; }
+  .lang-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .lang-btn:hover:not(.active) { border-color: var(--accent2); color: var(--accent2); }
+
+  /* Main content */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 24px 60px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .hero-name {
+    font-family: var(--mono);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-title {
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--green);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.3s;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: #94a3b8;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.5s;
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--accent2);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent2); transform: translateY(-1px); }
+
+  /* Status badge */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    background: rgba(52,211,153,0.08);
+    border: 1px solid rgba(52,211,153,0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.15s;
+  }
+
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* Section */
+  section {
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Skills grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 10px 14px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: #94a3b8;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent2); }
+  .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transition: transform 0.25s;
+  }
+
+  .project-card:hover { border-color: var(--accent); transform: translateX(4px); }
+  .project-card:hover::before { transform: scaleY(1); }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .project-title {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .project-arrow {
+    color: var(--muted);
+    font-size: 16px;
+    transition: color 0.2s;
+  }
+
+  .project-card:hover .project-arrow { color: var(--accent2); }
+
+  .project-desc {
+    font-size: 13.5px;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-blue { background: rgba(59,130,246,0.1); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+  .tag-green { background: rgba(52,211,153,0.1); color: #34d399; border: 1px solid rgba(52,211,153,0.2); }
+  .tag-amber { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+  .tag-red { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+
+  /* CI badge */
+  .ci-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    background: rgba(52,211,153,0.1);
+    color: var(--green);
+    border: 1px solid rgba(52,211,153,0.2);
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .ci-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.8s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Lang hidden */
+  [data-en] { display: none; }
+  body.en [data-es] { display: none; }
+  body.en [data-en] { display: revert; }
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="status-badge">
+      <span class="dot"></span>
+      <span data-es>Disponible para nuevas oportunidades</span>
+      <span data-en>Open to new opportunities</span>
+    </div>
+
+    <div class="hero-label" data-es>// QA ENGINEER JUNIOR</div>
+    <div class="hero-label" data-en>// JUNIOR QA ENGINEER</div>
+
+    <h1 class="hero-name">David <span>Martínez</span></h1>
+
+    <div class="hero-title">
+      <span data-es>Automatización de pruebas · API Testing · CI/CD</span>
+      <span data-en>Test Automation · API Testing · CI/CD</span>
+    </div>
+
+    <p class="hero-desc" data-es>
+      QA Engineer con experiencia en Selenium, Playwright y Cypress bajo el patrón Page Object Model.
+      Pruebas de API con Python y pytest. Pipeline de CI/CD activo con GitHub Actions.
+      Oaxaca, México.
+    </p>
+    <p class="hero-desc" data-en>
+      QA Engineer with hands-on experience in Selenium, Playwright, and Cypress using the Page Object Model.
+      API testing with Python and pytest. Active CI/CD pipeline with GitHub Actions.
+      Oaxaca, Mexico.
+    </p>
+
+    <div class="hero-links">
+      <a href="https://github.com/DavidHunter94" target="_blank" class="btn btn-primary">GitHub</a>
+      <a href="https://www.linkedin.com/in/víctor-david-martínez-matías-624160346/" target="_blank" class="btn btn-outline">LinkedIn</a>
+      <a href="mailto:davidmatiasmh94@gmail.com" class="btn btn-outline">Email</a>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-header">
+      <span class="section-label" data-es>HABILIDADES</span>
+      <span class="section-label" data-en>SKILLS</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-tag"><span class="skill-dot"></span>Python</div>
+      <div class="skill-tag"><span class="skill-dot"></span>Selenium</div>
+      <div class="skill-tag"><span class="skill-dot"></span>Playwright</div>
+      <div class="skill-tag"><span class="skill-dot"></span>Cypress</div>
+      <div class="skill-tag"><span class="skill-dot"></span>pytest</div>
+      <div class="skill-tag"><span class="skill-dot"></span>SQL</div>
+      <div class="skill-tag"><span class="skill-dot"></span>Postman</div>
+      <div class="skill-tag"><span class="skill-dot"></span>GitHub Actions</div>
+      <div class="skill-tag"><span class="skill-dot"></span>JIRA</div>
+      <div class="skill-tag"><span class="skill-dot"></span>Page Object Model</div>
+      <div class="skill-tag"><span class="skill-dot"></span>REST APIs</div>
+      <div class="skill-tag"><span class="skill-dot"></span>Scrum</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section>
+    <div class="section-header">
+      <span class="section-label" data-es>PROYECTOS</span>
+      <span class="section-label" data-en>PROJECTS</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <a href="https://github.com/DavidHunter94/qa-automation-playwright" target="_blank" class="project-card">
+        <div class="project-top">
+          <div class="project-title">Urban Routes — Playwright</div>
+          <span class="project-arrow">→</span>
+        </div>
+        <p class="project-desc" data-es>9 pruebas E2E automatizadas: ruta, tarifa, teléfono, pago y extras. Pipeline CI/CD activo con GitHub Actions.</p>
+        <p class="project-desc" data-en>9 automated E2E tests: route, fare, phone, payment, and extras. Active CI/CD pipeline with GitHub Actions.</p>
+        <div class="project-tags">
+          <span class="tag tag-blue">Python</span>
+          <span class="tag tag-blue">Playwright</span>
+          <span class="tag tag-blue">pytest</span>
+          <span class="tag tag-blue">POM</span>
+          <span class="ci-badge"><span class="ci-dot"></span>CI/CD</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/DavidHunter94/qa-project-Urban-Routes-es" target="_blank" class="project-card">
+        <div class="project-top">
+          <div class="project-title">Urban Routes — Selenium</div>
+          <span class="project-arrow">→</span>
+        </div>
+        <p class="project-desc" data-es>Flujo E2E completo: solicitud de taxi, verificación telefónica, pago y extras con Selenium 4.</p>
+        <p class="project-desc" data-en>Full E2E flow: taxi request, phone verification, payment, and extras with Selenium 4.</p>
+        <div class="project-tags">
+          <span class="tag tag-blue">Python</span>
+          <span class="tag tag-blue">Selenium 4</span>
+          <span class="tag tag-blue">pytest</span>
+          <span class="tag tag-blue">POM</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/DavidHunter94/Proyecto-urban-grocers-api-tests" target="_blank" class="project-card">
+        <div class="project-top">
+          <div class="project-title">Urban Grocers — API Testing</div>
+          <span class="project-arrow">→</span>
+        </div>
+        <p class="project-desc" data-es>Validación del endpoint de creación de kits: casos positivos, negativos, límites de caracteres y tipos de datos.</p>
+        <p class="project-desc" data-en>Kit creation endpoint validation: positive, negative, boundary value, and data type test cases.</p>
+        <div class="project-tags">
+          <span class="tag tag-green">Python</span>
+          <span class="tag tag-green">pytest</span>
+          <span class="tag tag-green">requests</span>
+          <span class="tag tag-green">REST API</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/DavidHunter94/urban-routes-cypress-beta" target="_blank" class="project-card">
+        <div class="project-top">
+          <div class="project-title">Urban Routes — Cypress</div>
+          <span class="project-arrow">→</span>
+        </div>
+        <p class="project-desc" data-es>Automatización E2E con verificación dinámica de SMS. Documentación de bugs críticos del frontend.</p>
+        <p class="project-desc" data-en>E2E automation with dynamic SMS verification. Critical frontend bug documentation.</p>
+        <div class="project-tags">
+          <span class="tag tag-amber">JavaScript</span>
+          <span class="tag tag-amber">Cypress 13</span>
+          <span class="tag tag-amber">Node.js</span>
+          <span class="tag tag-amber">POM</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/DavidHunter94/test-pokeapi" target="_blank" class="project-card">
+        <div class="project-top">
+          <div class="project-title">PokéAPI — Verificación</div>
+          <span class="project-arrow">→</span>
+        </div>
+        <p class="project-desc" data-es>10 casos de prueba contra API pública: happy path y casos negativos (404). Validación de status codes y body.</p>
+        <p class="project-desc" data-en>10 test cases against a public API: happy path and negative cases (404). Status code and body validation.</p>
+        <div class="project-tags">
+          <span class="tag tag-red">Python</span>
+          <span class="tag tag-red">requests</span>
+          <span class="tag tag-red">REST API</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>davidmatiasmh94@gmail.com · github.com/DavidHunter94 · Oaxaca, México</p>
+    <p style="margin-top:8px;color:#334155">
+      <span data-es>Construido con HTML · Alojado en GitHub Pages</span>
+      <span data-en>Built with HTML · Hosted on GitHub Pages</span>
+    </p>
+  </footer>
+
+</main>
+
+<script>
+  function setLang(lang) {
+    document.body.className = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn:${lang === 'es' ? 'first' : 'last'}-child`).classList.add('active');
+    localStorage.setItem('lang', lang);
+  }
+  const saved = localStorage.getItem('lang') || 'es';
+  if (saved === 'en') setLang('en');
+</script>
+
+</body>
+</html>
