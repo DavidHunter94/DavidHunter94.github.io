@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David Martinez — QA Engineer</title>
+  <title>David Martínez — QA Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -74,9 +74,7 @@
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 7rem 2.5rem 4rem;
+      padding: 6rem 2.5rem 2.5rem;
       position: relative;
       overflow: hidden;
     }
@@ -166,7 +164,7 @@
       position: relative;
     }
     .hero-right::before {
-      content: '// sobre_mi.md';
+      content: 'Sobre mí';
       font-family: var(--mono); font-size: 0.72rem;
       color: var(--muted);
       position: absolute; top: -0.6rem; left: 1.2rem;
@@ -195,11 +193,11 @@
     .section-title {
       font-family: var(--sans);
       font-size: 1.9rem; font-weight: 700;
-      letter-spacing: -0.02em; margin-bottom: 2.5rem;
+      letter-spacing: -0.02em; margin-bottom: 1.5rem;
     }
 
     /* ── SKILLS ── */
-    #skills { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    #skills { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 2.5rem 2.5rem; }
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -306,11 +304,11 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">davidhunter94<span style="color:var(--muted)">~</span><span style="color:var(--green)">$</span></span>
+  <span class="nav-logo">davidhunter94</span>
   <ul class="nav-links">
-    <li><a href="#skills"   data-es>habilidades</a><a href="#skills"   data-en>skills</a></li>
-    <li><a href="#projects" data-es>proyectos</a><a href="#projects" data-en>projects</a></li>
-    <li><a href="#education"data-es>educación</a><a href="#education"data-en>education</a></li>
+    <li><a href="#skills"   data-es>Habilidades</a><a href="#skills"   data-en>Skills</a></li>
+    <li><a href="#projects" data-es>Proyectos</a><a href="#projects" data-en>Projects</a></li>
+    <li><a href="#education" data-es>Educación</a><a href="#education" data-en>Education</a></li>
   </ul>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('es')">ES</button>
@@ -362,13 +360,9 @@
 
     <!-- Izquierda: nombre -->
     <div class="hero-left">
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        <span data-es>Disponible para nuevas oportunidades</span>
-        <span data-en>Open to new opportunities</span>
-      </div>
-      <div class="hero-label" style="margin-top:1rem">// QA ENGINEER</div>
-      <h1 class="hero-name">David <span>Martinez</span></h1>
+
+      <div class="hero-label" style="margin-top:1rem">QA ENGINEER</div>
+      <h1 class="hero-name">David <span>Martínez</span></h1>
       <p class="hero-tagline">
         <span style="color:var(--green)">Automatización</span>
         · API Testing · CI/CD
@@ -412,8 +406,8 @@
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-inner">
-    <div class="section-header" data-es>// HABILIDADES</div>
-    <div class="section-header" data-en>// SKILLS</div>
+    <div class="section-header" data-es>HABILIDADES</div>
+    <div class="section-header" data-en>SKILLS</div>
     <h2 class="section-title" data-es>Stack técnico</h2>
     <h2 class="section-title" data-en>Tech stack</h2>
     <div class="skills-grid">
@@ -434,8 +428,8 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-inner">
-    <div class="section-header" data-es>// PROYECTOS</div>
-    <div class="section-header" data-en>// PROJECTS</div>
+    <div class="section-header" data-es>PROYECTOS</div>
+    <div class="section-header" data-en>PROJECTS</div>
     <h2 class="section-title" data-es>Proyectos destacados</h2>
     <h2 class="section-title" data-en>Featured projects</h2>
     <div class="projects-grid">
@@ -507,8 +501,8 @@
 <!-- EDUCATION -->
 <section id="education">
   <div class="section-inner">
-    <div class="section-header" data-es>// EDUCACIÓN</div>
-    <div class="section-header" data-en>// EDUCATION</div>
+    <div class="section-header" data-es>EDUCACIÓN</div>
+    <div class="section-header" data-en>EDUCATION</div>
     <h2 class="section-title" data-es>Formación</h2>
     <h2 class="section-title" data-en>Education</h2>
     <div class="edu-card">
